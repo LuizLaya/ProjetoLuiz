@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="service.js"></script>
+</head>
+
+<body ng-controller="controlador as vm">
+  <form ng-submit="vm.buscarCEP()">
+    <input type="text" name="nome" id="nome" ng-model="vm.cepDigitado" required>
+    <button type="submit">Buscar CEP</button>
+  </form>
+  <div class="row">
+    <table>
+      <tbody ng-if="vm.cep">
+        <tr>
+          <td>cep</td>
+          <td>{{vm.cep}}</td>
+        </tr>
+        <tr>
+          <td>logradouro</td>
+          <td>{{vm.logradouro}}</td>
+        </tr>
+        <tr>
+          <td>complemento</td>
+          <td>{{vm.complemento}}</td>
+        </tr>
+        <tr>
+          <td>cep</td>
+          <td>{{vm.cep}}</td>
+        </tr>
+        <tr>
+          <td>bairro</td>
+          <td>{{vm.bairro}}</td>
+        </tr>
+        <tr>
+          <td>localidade</td>
+          <td>{{vm.localidade}}</td>
+        </tr>
+        <tr>
+          <td>uf</td>
+          <td>{{vm.uf}}</td>
+        </tr>
+        <tr>
+          <td>ibge</td>
+          <td>{{vm.ibge}}</td>
+        </tr>
+        <tr>
+          <td>ddd</td>
+          <td>{{vm.ddd}}</td>
+        </tr>
+        <tr>
+          <td>gia</td>
+          <td>{{vm.gia}}</td>
+        </tr>
+        <tr>
+          <td>siafi</td>
+          <td>{{vm.siafi}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <div ng-if="vm.resultadoCEP">
+    <pre>{{ vm.resultadoCEP | json }}</pre>
+  </div>
+
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+
+  <div class="row">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="conta in vm.conta">
+          <td style="background: #cef6ef;">{{conta.nome}}</td>
+          <td style="background: #cef6ef;">{{conta.descricao}}</td>
+          <td>
+            <button ng-click="vm.removerCrud(conta.nome)" style="background: red;"><strong>Deletar</strong></button>
+            <button ng-click="vm.altera(conta.descricao)"
+              style="background: rgb(0, 47, 255);"><strong>Alterar</strong></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button ng-click="vm.apareceForm()" style="background: greenyellow;"><strong>Adicionar pessoa na
+        lista</strong></button>
+    <form ng-if="vm.form">
+      <input ng-model="vm.nome" placeholder="joaquim" style="max-width: 250px" type="text" required>
+      <input ng-model="vm.descricao" placeholder="baixo" style="max-width: 250px" type="text" required>
+      <button ng-click="vm.salvar(vm.nome, vm.descricao)"
+        style="background: greenyellow"><strong>Salvar</strong></button>
+
+    </form>
+    <form ng-if="vm.alterando">
+      <input ng-model="vm.nome" placeholder="joaquim" style="max-width: 250px" type="text" required>
+      <input ng-model="vm.descricao" placeholder="baixo" style="max-width: 250px" type="text" required>
+      <button ng-click="vm.alterandoSucesso(vm.nome, vm.descricao)"
+        style="background: greenyellow"><strong>Salvar</strong></button>
+    </form>
+  </div>
+</body>
+
+</html>
